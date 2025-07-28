@@ -5,6 +5,16 @@ import { Sidebar } from "@/components/Layout/Sidebar";
 import { PromoteurDashboard } from "@/components/Dashboard/PromoteurDashboard";
 import { NormalisateurDashboard } from "@/components/Dashboard/NormalisateurDashboard";
 import { DirectionDashboard } from "@/components/Dashboard/DirectionDashboard";
+import { MembreGTDashboard } from "@/components/Dashboard/MembreGTDashboard";
+import { DocumentationDashboard } from "@/components/Dashboard/DocumentationDashboard";
+import { CommunicationDashboard } from "@/components/Dashboard/CommunicationDashboard";
+import { MyProposalsPage } from "@/components/Proposals/MyProposalsPage";
+import { FeasibilitySheetsPage } from "@/components/Feasibility/FeasibilitySheetsPage";
+import { NormProjectsPage } from "@/components/Norms/NormProjectsPage";
+import { ApprovalQueuePage } from "@/components/Approval/ApprovalQueuePage";
+import { ActiveNormsPage } from "@/components/Norms/ActiveNormsPage";
+import { MyCommentsPage } from "@/components/Comments/MyCommentsPage";
+import { MyMeetingsPage } from "@/components/Meetings/MyMeetingsPage";
 import { ProposeNormForm } from "@/components/Forms/ProposeNormForm";
 import { PublicSurveyPortal } from "@/components/PublicSurvey/PublicSurveyPortal";
 import { TechnicalBodiesManagement } from "@/components/TechnicalBodies/TechnicalBodiesManagement";
@@ -52,6 +62,12 @@ const Index = () => {
             return <NormalisateurDashboard onNavigate={handleNavigate} />;
           case "direction":
             return <DirectionDashboard onNavigate={handleNavigate} />;
+          case "membre_gt":
+            return <MembreGTDashboard onNavigate={handleNavigate} />;
+          case "documentation":
+            return <DocumentationDashboard onNavigate={handleNavigate} />;
+          case "communication":
+            return <CommunicationDashboard onNavigate={handleNavigate} />;
           default:
             return <div className="p-6">Dashboard pour {user.role} en cours de développement...</div>;
         }
@@ -76,6 +92,36 @@ const Index = () => {
       
       case "user-management":
         return <UserManagementPage />;
+      
+      case "my-proposals":
+        return <MyProposalsPage />;
+      
+      case "feasibility-sheets":
+        return <FeasibilitySheetsPage />;
+      
+      case "norm-projects":
+        return <NormProjectsPage />;
+      
+      case "approval-queue":
+        return <ApprovalQueuePage />;
+      
+      case "active-norms":
+        return <ActiveNormsPage />;
+      
+      case "my-comments":
+        return <MyCommentsPage />;
+      
+      case "my-meetings":
+        return <MyMeetingsPage />;
+      
+      case "approved-norms":
+        return <div className="p-6"><h1 className="text-2xl font-bold">Normes Homologuées</h1><p>Interface en développement...</p></div>;
+      
+      case "communications":
+        return <div className="p-6"><h1 className="text-2xl font-bold">Communications</h1><p>Interface en développement...</p></div>;
+      
+      case "broadcast-stats":
+        return <div className="p-6"><h1 className="text-2xl font-bold">Statistiques Diffusion</h1><p>Interface en développement...</p></div>;
       
       default:
         return (
