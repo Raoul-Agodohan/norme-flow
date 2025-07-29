@@ -10,6 +10,13 @@ import { DocumentationDashboard } from "@/components/Dashboard/DocumentationDash
 import { CommunicationDashboard } from "@/components/Dashboard/CommunicationDashboard";
 import { MyProposalsPage } from "@/components/Proposals/MyProposalsPage";
 import { FeasibilitySheetsPage } from "@/components/Feasibility/FeasibilitySheetsPage";
+import { FeasibilityDetailPage } from "@/components/Feasibility/FeasibilityDetailPage";
+import { CreateTechnicalBodyPage } from "@/components/TechnicalBodies/CreateTechnicalBodyPage";
+import { MeetingDetailPage } from "@/components/Meetings/MeetingDetailPage";
+import { ExpertPortalPage } from "@/components/Experts/ExpertPortalPage";
+import { PublishNormPage } from "@/components/Norms/PublishNormPage";
+import { CommunicationManagementPage } from "@/components/Communications/CommunicationManagementPage";
+import { ApprovedNormsPage } from "@/components/Norms/ApprovedNormsPage";
 import { NormProjectsPage } from "@/components/Norms/NormProjectsPage";
 import { ApprovalQueuePage } from "@/components/Approval/ApprovalQueuePage";
 import { ActiveNormsPage } from "@/components/Norms/ActiveNormsPage";
@@ -26,6 +33,7 @@ import { UserManagementPage } from "@/components/UserManagement/UserManagementPa
 const Index = () => {
   const [user, setUser] = useState<{role: string, name: string} | null>(null);
   const [currentRoute, setCurrentRoute] = useState("dashboard");
+  const [routeParams, setRouteParams] = useState<any>({});
 
   const handleLogin = (role: string, name: string) => {
     setUser({ role, name });
@@ -37,8 +45,9 @@ const Index = () => {
     setCurrentRoute("dashboard");
   };
 
-  const handleNavigate = (route: string) => {
+  const handleNavigate = (route: string, params?: any) => {
     setCurrentRoute(route);
+    setRouteParams(params || {});
   };
 
   // Vue publique pour l'enquête publique
@@ -114,8 +123,26 @@ const Index = () => {
       case "my-meetings":
         return <MyMeetingsPage />;
       
+      case "feasibility-detail":
+        return <FeasibilityDetailPage feasibilityId={routeParams.id} onBack={() => handleNavigate("feasibility-sheets")} />;
+      
+      case "create-technical-body":
+        return <CreateTechnicalBodyPage onBack={() => handleNavigate("technical-bodies")} />;
+      
+      case "meeting-detail":
+        return <MeetingDetailPage meetingId={routeParams.id} onBack={() => handleNavigate("meetings")} />;
+      
+      case "expert-portal":
+        return <ExpertPortalPage />;
+      
+      case "publish-norm":
+        return <PublishNormPage normId={routeParams.id} onBack={() => handleNavigate("dashboard")} />;
+      
+      case "communication-management":
+        return <CommunicationManagementPage />;
+      
       case "approved-norms":
-        return <div className="p-6"><h1 className="text-2xl font-bold">Normes Homologuées</h1><p>Interface en développement...</p></div>;
+        return <ApprovedNormsPage />;
       
       case "communications":
         return <div className="p-6"><h1 className="text-2xl font-bold">Communications</h1><p>Interface en développement...</p></div>;
