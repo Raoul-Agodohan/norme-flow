@@ -292,7 +292,15 @@ export const MyCommentsPage = () => {
                 </div>
 
                 <div className="flex flex-col space-y-2 ml-4">
-                  <Button variant="outline" size="sm" className="flex items-center">
+                  <Button 
+                    variant="outline" 
+                    size="sm" 
+                    className="flex items-center"
+                    onClick={() => {
+                      const route = `comment-context/${comment.id}`;
+                      window.location.hash = `#${route}`;
+                    }}
+                  >
                     <Eye className="h-4 w-4 mr-1" />
                     Voir contexte
                   </Button>

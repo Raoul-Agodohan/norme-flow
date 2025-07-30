@@ -29,6 +29,8 @@ import { NormsLibrary } from "@/components/Library/NormsLibrary";
 import { MeetingsManagement } from "@/components/Meetings/MeetingsManagement";
 import { StatisticsPage } from "@/components/Statistics/StatisticsPage";
 import { UserManagementPage } from "@/components/UserManagement/UserManagementPage";
+import { BroadcastStatsPage } from "@/components/Statistics/BroadcastStatsPage";
+import { CommentContextPage } from "@/components/Comments/CommentContextPage";
 
 const Index = () => {
   const [user, setUser] = useState<{role: string, name: string} | null>(null);
@@ -46,8 +48,15 @@ const Index = () => {
   };
 
   const handleNavigate = (route: string, params?: any) => {
-    setCurrentRoute(route);
-    setRouteParams(params || {});
+    // Gérer les routes avec hash pour les IDs
+    if (route.includes('/')) {
+      const [routeName, id] = route.split('/');
+      setCurrentRoute(routeName);
+      setRouteParams({ id, ...params });
+    } else {
+      setCurrentRoute(route);
+      setRouteParams(params || {});
+    }
   };
 
   // Vue publique pour l'enquête publique
@@ -145,10 +154,13 @@ const Index = () => {
         return <ApprovedNormsPage />;
       
       case "communications":
-        return <div className="p-6"><h1 className="text-2xl font-bold">Communications</h1><p>Interface en développement...</p></div>;
+        return <CommunicationManagementPage />;
       
       case "broadcast-stats":
-        return <div className="p-6"><h1 className="text-2xl font-bold">Statistiques Diffusion</h1><p>Interface en développement...</p></div>;
+        return <BroadcastStatsPage />;
+      
+      case "comment-context":
+        return <CommentContextPage commentId={routeParams.id} onBack={() => handleNavigate("my-comments")} />;
       
       default:
         return (
